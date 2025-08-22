@@ -1,0 +1,100 @@
+# README – Projeto Django + API com venv + Postgres
+
+## 1️⃣ Requisitos
+
+ Python 3.11+ instalado
+ Postgres instalado (ou Docker para Postgres)
+ Navegador para acessar a aplicação
+
+## 2️⃣ Criar e ativar ambiente virtual
+
+No terminal, dentro da pasta do projeto
+
+```powershell
+python -m venv venv
+```
+
+Ative o `venv`
+
+ Windows (PowerShell)
+
+```powershell
+.Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\venv\Scripts\Activate.ps1
+```
+
+
+
+ LinuxMac
+
+```bash
+source ven/bin/activate
+```
+
+## 3️⃣ Instalar dependências
+
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+## 4️⃣ Configurar banco Postgres
+
+1. Crie um banco no Postgres
+
+ Nome do banco `meuprojeto`
+ Usuário `admin`
+ Senha `admin`
+
+ Se quiser, você pode alterar esses valores no `settings.py` do Django.
+
+2. Teste a conexão
+
+```bash
+psql -U admin -d meuprojeto
+```
+
+## 5️⃣ Rodar migrações
+
+```bash
+python manage.py migrate
+```
+
+## 6️⃣ Criar superusuário
+
+```bash
+python manage.py createsuperuser
+```
+
+## 7️⃣ Rodar a aplicação
+
+```bash
+python manage.py runserver
+```
+
+ Site principal [http127.0.0.18000](http127.0.0.18000)
+ Admin do Django [http127.0.0.18000admin](http127.0.0.18000admin)
+
+## 8️⃣ Testar API
+
+Se houver endpoints de API (DRF)
+
+```
+http127.0.0.18000api
+```
+
+ Substitua `api` pelo path da sua API.
+
+## 9️⃣ Parar a aplicação
+
+ No terminal Ctrl+C
+ Desativar venv
+
+```powershell
+deactivate
+```
+
+💡 Dicas
+
+ Sempre ative o `venv` antes de rodar qualquer comando Django.
+ Se o Postgres estiver em outra porta, ajuste `PORT` em `settings.py`.
