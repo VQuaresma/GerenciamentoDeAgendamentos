@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')), #rota de login/logout
     path("signup/", accounts_views.signup, name="signup"), #rota de novo usuario
+    path('api/', include('agendas.urls')),
 ]

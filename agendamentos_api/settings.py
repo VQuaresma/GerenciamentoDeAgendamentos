@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'agendamento',
     'accounts',
+    'agendas',
 ]
 
 MIDDLEWARE = [
@@ -83,7 +84,7 @@ DATABASES = {
         'NAME': os.environ.get('DATABASE_NAME', 'meuprojeto'),
         'USER': os.environ.get('DATABASE_USER', 'admin'),
         'PASSWORD': os.environ.get('DATABASE_PASSWORD', 'admin'),
-        'HOST': os.environ.get('DATABASE_HOST', 'postgres'),  # nome do serviço docker
+        'HOST': os.environ.get('DATABASE_HOST', 'db'),  # nome do serviço docker
         'PORT': os.environ.get('DATABASE_PORT', '5432'),
     }
 
@@ -133,4 +134,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
