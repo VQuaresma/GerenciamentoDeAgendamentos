@@ -7,7 +7,7 @@ from rest_framework.serializers import ModelSerializer
 class AgendaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Agenda
-        fields = ['id', 'usuario', 'titulo', 'descricao', 'data', 'hora', 'cancelada', 'criado_em']
+        fields = ['id', 'usuario', 'titulo', 'descricao', 'status' ,'data', 'hora', 'criado_em']
         read_only_fields = ['id', 'usuario', 'criado_em']
 
 class UserSerializer(ModelSerializer):

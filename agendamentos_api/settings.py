@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'agendamento',
     'accounts',
     'agendas',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [

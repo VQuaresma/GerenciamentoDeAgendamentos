@@ -16,11 +16,29 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import permissions
 from accounts import views as accounts_views
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="API de Agendas",
+        default_version='v1',
+        description="Documentação da API de gerenciamento de agendas",
+        contact=openapi.Contact(email="vitorquaresmadasilva@gmail.com"),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')), #rota de login/logout
     path("signup/", accounts_views.signup, name="signup"), #rota de novo usuario
     path('api/', include('agendas.urls')),
+    # Swagger UI
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    # Redoc UI
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
