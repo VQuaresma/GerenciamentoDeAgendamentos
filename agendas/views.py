@@ -6,7 +6,7 @@ from .models import Agenda
 from .serializers import AgendaSerializer, UserSerializer
 from rest_framework.permissions import IsAdminUser
 from django.contrib.auth.models import User
-
+from drf_yasg.utils import swagger_auto_schema
 class AgendaViewSet(viewsets.ModelViewSet):
     serializer_class = AgendaSerializer
     permission_classes = [IsAuthenticated]
@@ -16,13 +16,19 @@ class AgendaViewSet(viewsets.ModelViewSet):
         qs = Agenda.objects.filter(excluido=False)
         if user.is_staff:
             return qs
-        # Garante que cada usuário só veja suas próprias agendas
         return qs.filter(usuario=user)
 
+    @swagger_auto_schema(
+            operation_description="Cria uma nova agenda para o usuario logado",
+            request_body=AgendaSerializer,
+            responses={201: AgendaSerializer}
+    )
     def perform_create(self, serializer):
-        # Salva o usuário logado ao criar a agenda
         serializer.save(usuario=self.request.user)
 
+    @swagger_auto_schema(
+            operation_description="Cancela uma agenda específica."
+    )
     @action(detail=True, methods=['post'])
     def cancelar(self, request, pk=None):
         agenda = self.get_object()
@@ -32,6 +38,10 @@ class AgendaViewSet(viewsets.ModelViewSet):
         agenda.save()
         return Response({"detail": "Agenda cancelada com sucesso"})
     
+    @swagger_auto_schema(
+            operation_description="Atualiza o status de uma agenda ( somente users com admin)",
+            request_body=AgendaSerializer
+    )
     @action(detail=True, methods=['post'], permission_classes=[IsAdminUser])
     def atualizar_status(self, request, pk=None):
         agenda = self.get_object()
@@ -44,6 +54,10 @@ class AgendaViewSet(viewsets.ModelViewSet):
         agenda.save()
         return Response({"detail": f"Status atualizado para {agenda.status}"})
 
+
+    @swagger_auto_schema(
+            operation_description="Exclui por softdelete uma agenda."
+    )
     @action(detail=True, methods=['post'])
     def excluir(self, request, pk=None):
         agenda = self.get_object()
@@ -51,12 +65,19 @@ class AgendaViewSet(viewsets.ModelViewSet):
         agenda.save()
         return Response({"detail": "Agenda movida para excluídos."})
     
+
+    @swagger_auto_schema(
+            operation_description="Lista todas as agendas excluidas (somente adiministradores)"
+    )
     @action(detail=False, methods=['get'], permission_classes=[IsAdminUser])
     def excluidos(self, request):
         agendas = Agenda.objects.filter(excluido=True)
         serializer = self.get_serializer(agendas, many=True)
         return Response(serializer.data)
 
+    @swagger_auto_schema(
+            operation_description="Restaura uma aenda excluida (somente adiministradores)"
+    )
     @action(detail=True, methods=['post'], permission_classes=[IsAdminUser])
     def restaurar(self, request, pk=None):
     # Busca a agenda mesmo que esteja excluída

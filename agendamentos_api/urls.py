@@ -21,6 +21,7 @@ from accounts import views as accounts_views
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
+#doumentação por endpoint
 schema_view = get_schema_view(
     openapi.Info(
         title="API de Agendas",
@@ -33,12 +34,12 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    #rotas do projeto
+    path('admin/', admin.site.urls), #rota de controle dos admins 
     path('accounts/', include('django.contrib.auth.urls')), #rota de login/logout
     path("signup/", accounts_views.signup, name="signup"), #rota de novo usuario
     path('api/', include('agendas.urls')),
-    # Swagger UI
-    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    # Redoc UI
-    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    # urls de documentação
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),# Swagger UI
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'), # Redoc UI
 ]

@@ -5,6 +5,7 @@ from .models import Agenda
 from rest_framework.serializers import ModelSerializer
 
 class AgendaSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = Agenda
         fields = ['id', 'usuario', 'titulo', 'descricao', 'status' ,'data', 'hora', 'criado_em']

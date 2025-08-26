@@ -7,15 +7,26 @@ class Agenda(models.Model):
         ("marcado", "MARC"),
         ("cancelado", "CANCEL")
     ]
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)  # quem criou
-    titulo = models.CharField(max_length=200)
-    descricao = models.TextField(blank=True, null=True)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="pendente")
-    data = models.DateField()
-    hora = models.TimeField()
-    criado_em = models.DateTimeField(auto_now_add=True)
 
+    titulo = models.CharField(max_length=200) # titulo do agendamento
+    descricao = models.TextField(blank=True, null=True) # descrição do agendamento
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="pendente") # status do agendamento
+    #Data e hora do agendamento
+    data = models.DateField() 
+    hora = models.TimeField()
+
+    #campos de auditoria
     excluido = models.BooleanField(default=False)
+    criado_em = models.DateTimeField(auto_now_add=True)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)  # quem criou
+
+    """ 
+    
+    `modified_by` (último usuário que modificou)
+    `modified_at` (data da última modificação)
+    `deleted_by` (usuário que excluiu)
+    `deleted_at` (data de exclusão)
+    `is_deleted` (flag de exclusão lógica) """
 
 
     def __str__(self):
