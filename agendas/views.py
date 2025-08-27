@@ -104,5 +104,5 @@ class AgendaViewSet(viewsets.ModelViewSet):
     
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
-    serializers_class = UserSerializer
+    serializer_class = UserSerializer
     permission_classes = [IsAdminUser]
