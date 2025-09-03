@@ -1,45 +1,66 @@
-# Gerenciamento de Agendas
+💻 Gerenciamento de Agendas
+API desenvolvida para gerenciar a reserva de horários. O projeto utiliza Django para o backend, PostgreSQL como banco de dados e Docker para a containerização da aplicação.
 
+:hammer: Funcionalidades
+Gerenciamento de usuários:
 
+Criação de usuários e sistema de login.
 
-Descrição:
-APi desenvolvida para poder gerenciar a reserva de horários usando, django no backend, postgress de banco de dados e docker para rodar os containers do app.
+Permissões de administrador e usuário bem definidas.
 
+Agendamento de horários:
 
-# :hammer: Funcionalidades do projeto
-- `Funcionalidade 1`: Criação de usuarios e sistema de login
-- `Funcionalidade 1a`: permissões de usuários e de administradores separadas bem definidamente
-- `Funcionalidade 2`: agendamento de horarios
-- `Funcionalidade 2a`: campos de auditoria, softdelete, status, restauração e exclusão total 
+Agendamento de horários.
 
+Campos de auditoria, soft delete, status, restauração e exclusão total.
 
-# 📁 Acesso ao projeto
--Copie a url do repositório no github do projeto "https://github.com/VQuaresma/GerenciamentoDeAgendamentos"
--Abra seu terminal e digite o comando "git clone {url do projeto}"
--Após terminar de baixar digite o comando "ls" e se tudo tiver clonado com sucesso ira aparecer o nome do projeto
--Digite "cd {nome do projeto}" para entrar na pasta do projeto
--Digite "code ." para começar a iniciar ele 
--
-# 🛠️ Abrir e rodar o projeto
+📁 Acesso ao projeto
+Clone o repositório:
+Abra seu terminal e execute o comando:
 
-Iniciar Ambiente virtual:
-    - primeiro crie um ambiente virtual
-    No Windows:
-        python -m venv venv
-        .\venv\Scripts\Activate.ps1
-    No Linux: 
-        python3 -m venv venv
-        source venv/bin/activate
+Bash
 
-Subir Containers docker:
-    -Após configurar seu dockerfile e o docker-compose.yml você pode subir seus containers para funcionamento da api.
-        -Rode o comando "docker-compose up" ( isso vai construir as imagens[se a primeira vez rodando ] e subir todos os containers definidos no seu docker-compose.yml)
-        -Para rodar sem travar os terminais rode "docker-compose up -d"
-        -Não sera necessario fazer as instalações das bibliotecas, pois no seu dockerfile ( se não foi alterado ) o docker ja roda comandos para baixar e iniciar a aplicação.
+git clone https://github.com/VQuaresma/GerenciamentoDeAgendamentos.git
+Acesse a pasta do projeto:
 
-Acessar a API:
-    -Você pode acessar http://127.0.0.1:8000/swagger/ para visualizar a documentação da API ou http://127.0.0.1:8000/redoc/
+Bash
 
+cd GerenciamentoDeAgendamentos
+Abra o projeto no VS Code (opcional):
 
+Bash
 
+code .
+🛠️ Como rodar o projeto
+1. Iniciar o ambiente virtual
+Windows:
 
+Bash
+
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+Linux:
+
+Bash
+
+python3 -m venv venv
+source venv/bin/activate
+2. Subir os containers do Docker
+Seus containers serão iniciados automaticamente e as dependências serão instaladas via Dockerfile (caso não tenha sido alterado).
+
+Para iniciar os containers em segundo plano, use:
+
+Bash
+
+docker-compose up -d
+Se preferir, para visualizar os logs no terminal, use:
+
+Bash
+
+docker-compose up
+3. Acessar a API
+Após o Docker estar em execução, você pode acessar a documentação da API em:
+
+Swagger: http://127.0.0.1:8000/swagger/
+
+Redoc: http://127.0.0.1:8000/redoc/
